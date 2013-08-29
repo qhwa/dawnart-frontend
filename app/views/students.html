@@ -1,0 +1,110 @@
+<h1>
+    学员名单
+    <a class="btn btn-primary pull-right" ng-click="addingNew=true" ng-hide="addingNew"><i class="glyphicon glyphicon-plus"/> 添加</a>
+</h1>
+
+<form ng-show="addingNew" ng-submit="create()" class="form-horizontal">
+
+    <div class="form-group">
+        <label form="inputName" class="col-lg-2 control-label">姓名</label>
+        <div class="col-lg-4">
+            <input type="text" class="form-control" id="inputName" ng-model="newStudent.name" required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label form="inputAge" class="col-lg-2 control-label">年龄</label>
+        <div class="col-lg-2">
+            <input type="number" class="form-control" id="inputAge" ng-model="newStudent.age" required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label form="inputMobile" class="col-lg-2 control-label">手机</label>
+        <div class="col-lg-4">
+            <input type="mobile" class="form-control" id="inputMobile" ng-model="newStudent.mobile" />
+        </div>
+
+        <label form="inputPhone" class="col-lg-2 control-label">电话</label>
+        <div class="col-lg-4">
+            <input type="mobile" class="form-control" id="inputPhone" ng-model="newStudent.phone" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label form="inputClass" class="col-lg-2 control-label">报名班级</label>
+        <div class="col-lg-4">
+            <div ng-repeat="class in classNames" class="radio">
+                <label>
+                    <input type="radio"
+                        name="class"
+                        ng-model="newStudent.class"
+                        value="{{class}}">
+                        {{class}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label form="inputPurpose" class="col-lg-2 control-label">报名原因</label>
+        <div class="col-lg-4">
+            <div ng-repeat="class in purposes" class="radio">
+                <label>
+                    <input type="radio"
+                        name="purpose"
+                        ng-model="newStudent.purpose"
+                        value="{{class}}">
+                        {{class}}
+                </label>
+            </div>
+        </div>
+
+        <label form="inputFrom" class="col-lg-2 control-label">从哪里得知？</label>
+        <div class="col-lg-4">
+            <div ng-repeat="class in froms" class="checkbox">
+                <label>
+                    <input type="checkbox"
+                        name="from"
+                        ng-model="newStudent.from"
+                        value="{{class}}">
+                        {{class}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+            <button type="submit" class="btn btn-success">提交</button>
+            <button class="btn btn-default" ng-click="addingNew=false">取消</button>
+        </div>
+    </div>
+</form>
+<table class="table table-striped">
+    <thead>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>手机</th>
+        <th>电话</th>
+        <th>班级</th>
+        <th>报名原因</th>
+        <th>渠道</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="student in students">
+            <td>{{student.name}}</td>
+            <td>{{student.age}}</td>
+            <td>{{student.mobile}}</td>
+            <td>{{student.phone}}</td>
+            <td>{{student.class}}</td>
+            <td>{{student.purpose}}</td>
+            <td>{{student.from}}</td>
+            <td>
+                <a class="btn btn-default" ng-click="editing=true">修改</a>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
