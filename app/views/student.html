@@ -58,7 +58,7 @@
     <section class="comments">
         <h4>备注</h4>
         <article ng-repeat="comment in comments" class="comment">
-            <div class="comment-icon">
+            <div class="comment-icon comment-icon-{{comment.icon_type}}">
                 <span class="glyphicon glyphicon-{{comment.icon_type}}"></span>
             </div>
                 

@@ -148,6 +148,13 @@ section.comments {
     text-align: center;
     border: 3px solid #fff;
     color: #fff;
+
+    &.comment-icon-usd {
+        background: #f0ad4e;
+    }
+
+    &.comment-icon-comment {
+    }
 }
 
 .comment-body { overflow: hidden }
