@@ -26,9 +26,18 @@
         <div class="container">
             <div class="header">
                 <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">首页</a></li>
-                    <li><a href="#students">学员</a></li>
-                    <li><a href="#attendance">考勤</a></li>
+                    <li class="pagekey pagekey-home">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-home"></span>
+                            首页</a></li>
+                    <li class="pagekey pagekey-students">
+                        <a href="#students">
+                            <span class="glyphicon glyphicon-user"></span>
+                            学员</a></li>
+                    <li class="pagekey pagekey-attendance">
+                        <a href="#attendance">
+                            <span class="glyphicon glyphicon-check"></span>
+                        考勤</a></li>
                 </ul>
                 <h3 class="text-muted">Dawnart | 起点画室</h3>
             </div>
@@ -36,7 +45,9 @@
             <div ng-view=""></div>
 
             <div class="footer">
-                <p>♥ from Pigeon &amp; Qhwa.</p>
+                <p>
+                    <span class="glyphicon glyphicon-heart"></span>
+                from Pigeon &amp; Qhwa.</p>
             </div>
         </div>
 
@@ -57,6 +68,7 @@
             ga('create','UA-XXXXX-X');ga('send','pageview');
         </script>
 
+        <script src="bower_components/underscore/underscore.js"></script>
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/angular/angular.js"></script>
 

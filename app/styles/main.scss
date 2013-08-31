@@ -1,4 +1,3 @@
-$brand-primary:  #F75306 !default;
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
@@ -71,7 +70,7 @@ body {
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
-        max-width: 730px;
+        max-width: 960px;
     }
 
     /* Remove the padding we set earlier */

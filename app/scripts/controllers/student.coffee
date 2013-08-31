@@ -7,22 +7,22 @@ angular.module('dawnartApp')
       {
         name: "鸽子"
         pinyin: "gezi"
-        age: "2"
+        age: 2
         mobile: "15869103067"
         phone: ""
         class: "全日制班"
         purpose: "业余爱好"
-        from: "他人推荐"
+        from: ["他人推荐"]
       },
       {
-        name: "鸽子"
+        name: "朱朱"
         pinyin: "gezi"
-        age: "2"
+        age: 2
         mobile: "15869103067"
         phone: ""
         class: "全日制班"
         purpose: "业余爱好"
-        from: "他人推荐"
+        from: ["他人推荐"]
       }
     ]
 
@@ -42,17 +42,42 @@ angular.module('dawnartApp')
     ]
 
     $scope.froms = [
-      '他人推荐'
-      '百度/谷歌'
-      '58同城'
-      '19楼'
-      '其他互联网途径'
-      '其他'
+      { name: '他人推荐' }
+      { name: '百度/谷歌' }
+      { name: '58同城' }
+      { name: '19楼' }
+      { name: '其他互联网途径' }
+      { name: '其他' }
     ]
 
-    $scope.addingNew = true
+    $scope.addingNew = false
 
     $scope.create = () ->
-      $scope.students.unshift $scope.newStudent
+      student = $scope.newStudent
+      student.from = $scope.selectedFroms()
+      $scope.students.unshift student
       $scope.newStudent = {}
       $scope.addingNew = false
+
+    $scope.rm = (index) ->
+      $scope.students.splice(index, 1)
+
+    $scope.edit = (index) ->
+      student = $scope.students[index]
+      $scope.currentStudent = student
+      $scope.setSelectedFroms(student.from)
+      $scope.editing = true
+
+    $scope.save = () ->
+      $scope.currentStudent.from = $scope.selectedFroms()
+      $scope.editing = false
+
+    $scope.selectedFroms = () ->
+      _.pluck(_.where($scope.froms, { checked: true }), 'name')
+
+    $scope.setSelectedFroms = (froms) ->
+      console.log froms
+      _.each $scope.froms, (from) ->
+        console.log from.name, _.include(froms, from.name)
+        from.checked = _.include(froms, from.name)
+
