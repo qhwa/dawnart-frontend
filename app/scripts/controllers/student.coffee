@@ -5,6 +5,7 @@ angular.module('dawnartApp')
 
     $scope.students = [
       {
+        id: 1
         name: "鸽子"
         pinyin: "gezi"
         age: 2
@@ -15,6 +16,7 @@ angular.module('dawnartApp')
         from: ["他人推荐"]
       },
       {
+        id: 2
         name: "朱朱"
         pinyin: "gezi"
         age: 2
@@ -51,6 +53,9 @@ angular.module('dawnartApp')
     ]
 
     $scope.addingNew = false
+    $scope.newStudent = {
+      age: 20
+    }
 
     $scope.create = () ->
       student = $scope.newStudent

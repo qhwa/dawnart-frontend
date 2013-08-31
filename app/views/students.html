@@ -12,7 +12,7 @@
         <div class="form-group">
             <label form="inputAge" class="col-lg-2 control-label">年龄</label>
             <div class="col-lg-2">
-                <input type="number" class="form-control" id="inputAge" ng-model="newStudent.age" required />
+                <input type="number" class="form-control" id="inputAge" ng-model="newStudent.age" />
             </div>
         </div>
 
@@ -190,7 +190,9 @@
         </thead>
         <tbody>
             <tr ng-repeat="student in students">
-                <td>{{student.name}}</td>
+                <td>
+                    <a href="#students/{{student.id}}">{{student.name}}</a>
+                </td>
                 <td>{{student.age}}</td>
                 <td>{{student.mobile}}</td>
                 <td>{{student.phone}}</td>
@@ -210,3 +212,13 @@
 
     </table>
 </article>
+
+<ul class="pagination">
+  <li class="disabled"><a href="#">&laquo;</a></li>
+  <li class="active"><a href="#">1</a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">&raquo;</a></li>
+</ul>

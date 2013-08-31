@@ -1,0 +1,99 @@
+<div ng-controller="StudentDetailCtrl">
+
+    <section class="profile">
+        <div class="row">
+            <div class="col-md-4">
+                <h1>{{student.name}}</h1>
+                <ul class="unstyled">
+                    <li>{{student.age}}岁</li>
+                    <li>{{student.mobile}} {{student.phone}}</li>
+                    <li>为了 {{student.purpose}}</li>
+                    <li>来源于 {{student.from.join(",")}}</li>
+                </ul>
+            </div>
+
+            <div class="col-md-8">
+                <div class="col-md-10">
+                    <table class="table">
+                        <tr>
+                            <td class="caption">报名班级</td>
+                            <td>{{student.class}}</td>
+                        </tr>
+                        <tr>
+                            <td class="caption">总课时</td>
+                            <td>{{student.total_classtimes}}</td>
+                        </tr>
+                        <tr>
+                            <td class="caption">已用课时</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width:{{student.progress}}"></div>
+                                </div>
+                                {{student.used_classtimes}}
+                                <a href="#/students/{{student.id}}/attendace">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="caption">剩余课时</td>
+                            <td>{{student.left_classtimes}}</td>
+                        </tr>
+                        <tr>
+                            <td class="caption">报名日期</td>
+                            <td>{{student.registed_on}}</td>
+                        </tr>
+                        <tr>
+                            <td class="caption">上课日期</td>
+                            <td>{{student.begin_on}}</td>
+                        </tr>
+                        <tr>
+                            <td class="caption">截至日期</td>
+                            <td>{{student.need_finish_on}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="comments">
+        <h4>备注</h4>
+        <article ng-repeat="comment in comments" class="comment">
+            <div class="comment-icon">
+                <span class="glyphicon glyphicon-{{comment.icon_type}}"></span>
+            </div>
+                
+            <div class="comment-body">
+                <div class="text">
+                    <p>{{comment.body}}
+                        <span class="pull-right">
+                            <a ng-click="rmComment($index)" href="">
+                                <span class="glyphicon glyphicon-trash">
+                            </a>
+                        </span>
+                    </p>
+                </div>
+                <p class="attribution">
+                    {{comment.created_by}} / {{comment.created_at}}
+                </p>
+            </div>
+        </article>
+
+        <div class="new-comment">
+
+            <div class="caption" ng-click="addComment()" ng-hide="addingComment">添加备注...</div>
+
+            <form ng-show="addingComment" ng-submit="createComment()" role="form">
+                <div class="form-group">
+                    <textarea id="comment-body" class="form-control input-block-level" ng-model="newComment.body" rows="6"></textarea>
+                </div>
+                <div class="form-actions form-group">
+                    <button type="submit" class="btn btn-success">提交</button>
+                    <button type="button" class="btn btn-default" ng-click="addingComment=false">取消</button>
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+
+</div>
