@@ -14,9 +14,19 @@ angular.module('dawnartApp', [])
         controller:     'StudentCtrl'
         key:            'students'
 
+      .when '/students/new',
+        templateUrl:    'views/new-student.html'
+        controller:     'NewStudentCtrl'
+        key:            'students'
+
       .when '/students/:id',
         templateUrl:    'views/student.html'
         controller:     'StudentDetailCtrl'
+        key:            'students'
+
+      .when '/students/:id/edit',
+        templateUrl:    'views/edit-student.html'
+        controller:     'EditStudentCtrl'
         key:            'students'
 
       .when '/attendance',

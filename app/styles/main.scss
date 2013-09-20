@@ -102,6 +102,12 @@ td.caption {
     font-weight: bold;
 }
 
+table.table {
+    tbody > tr > td {
+        vertical-align: middle;
+    }
+}
+
 section.profile, section.class {
     table {
         td {

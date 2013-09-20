@@ -9,21 +9,21 @@ angular.module('dawnartApp')
     ]
 
     $scope.student =
-      id: 1
-      name: "鸽子"
-      pinyin: "gezi"
+      id:             1
+      name:           "鸽子"
+      pinyin:         "gezi"
       age: 2
-      mobile: "15869103067"
-      phone: ""
-      class: "全日制班"
-      purpose: "业余爱好"
-      from: ["他人推荐"]
-      total_classtimes: 90
-      used_classtimes: 30
-      left_classtimes: 60
-      progress: '33.33%'
-      registed_on: '2013-08-01'
-      begin_on: '2013-08-01'
+      mobile:         "15869103067"
+      phone:          ""
+      class:          "全日制班"
+      purpose:        "业余爱好"
+      from:           ["他人推荐"]
+      time_total:     90
+      time_used:      30
+      time_left:      60
+      progress:       '33.33%'
+      registed_on:    '2013-08-01'
+      begin_on:       '2013-08-01'
       need_finish_on: '2013-10-01'
 
     $scope.comments = [

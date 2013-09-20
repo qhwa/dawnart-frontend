@@ -21,7 +21,7 @@
                         </tr>
                         <tr>
                             <td class="caption">总课时</td>
-                            <td>{{student.total_classtimes}}</td>
+                            <td>{{student.time_total}}</td>
                         </tr>
                         <tr>
                             <td class="caption">已用课时</td>
@@ -29,13 +29,13 @@
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width:{{student.progress}}"></div>
                                 </div>
-                                {{student.used_classtimes}}
+                                {{student.time_used}}
                                 <a href="#/students/{{student.id}}/attendace">查看详情</a>
                             </td>
                         </tr>
                         <tr>
                             <td class="caption">剩余课时</td>
-                            <td>{{student.left_classtimes}}</td>
+                            <td>{{student.time_left}}</td>
                         </tr>
                         <tr>
                             <td class="caption">报名日期</td>
