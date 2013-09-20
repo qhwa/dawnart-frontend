@@ -2,20 +2,13 @@
 
 angular.module('dawnartApp')
 
-  .controller 'EditStudentCtrl', ($scope, $routeParams) ->
+  .controller 'EditStudentCtrl', ($scope, $routeParams, $location, Student) ->
 
-    $scope.student =
-      id:       1
-      name:     "鸽子"
-      pinyin:   "gezi"
-      age:      2
-      mobile:   "15869103067"
-      phone:    ""
-      class:    "全日制班"
-      purpose:  "业余爱好"
-      from:     ["他人推荐"]
+    $scope.student = new Student( id: $routeParams.id )
+    $scope.student.$show () ->
+      $scope.setSelectedFroms( $scope.student.from_list )
 
-    $scope.classNames = [
+    $scope.courseNames = [
       '全日制班',
       '周末班',
       '寒暑假班',
@@ -40,13 +33,24 @@ angular.module('dawnartApp')
     ]
 
     $scope.save = () ->
-      $scope.student.from = $scope.selectedFroms()
+      $scope.saving = true
 
-    $scope.selectedFroms = () ->
-      _.pluck(_.where($scope.froms, { checked: true }), 'name')
+      succ = () ->
+        $scope.saving = false
+        $location.path '/students'
+
+      err = () ->
+        $scope.saving = false
+
+      $scope.student.$update succ, err
+
 
     $scope.setSelectedFroms = (froms) ->
       _.each $scope.froms, (from) ->
         from.checked = _.include(froms, from.name)
 
-    $scope.setSelectedFroms( $scope.student.from )
+    $scope.onChangeFrom = (scope) ->
+      $scope.student.from_list = $scope.selectedFroms()
+
+    $scope.selectedFroms = () ->
+      _.pluck(_.where($scope.froms, { checked: true }), 'name')

@@ -1,33 +1,20 @@
 'use strict'
 
 angular.module('dawnartApp')
-  .controller 'StudentCtrl', ($scope) ->
+  .controller 'StudentCtrl', ($scope, Students, Student) ->
 
-    $scope.students = [
-      {
-        id: 1
-        name: "鸽子"
-        pinyin: "gezi"
-        age: 2
-        mobile: "15869103067"
-        phone: ""
-        class: "全日制班"
-        purpose: "业余爱好"
-        from: ["他人推荐"]
-      },
-      {
-        id: 2
-        name: "朱朱"
-        pinyin: "gezi"
-        age: 2
-        mobile: "15869103067"
-        phone: ""
-        class: "全日制班"
-        purpose: "业余爱好"
-        from: ["他人推荐"]
-      }
-    ]
+    $scope.students = Students.query()
 
-    $scope.rm = (index) ->
-      $scope.students.splice(index, 1)
+    $scope.rm = (index, scope) ->
+      scope.loading = true
+      student = $scope.students[index]
+
+      succ = () ->
+        scope.loading = false
+        $scope.students.splice index, 1
+
+      err = () ->
+        scope.loading = false
+
+      new Student(student).$destroy succ, err
 

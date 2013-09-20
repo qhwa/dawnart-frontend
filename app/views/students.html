@@ -1,6 +1,6 @@
 <h1>
     <span class="glyphicon glyphicon-user"></span> 学员名单
-    <a href="#students/new" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"/> 添加</a>
+    <a href="#students/new" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> 添加</a>
 </h1>
 
 <table class="table table-striped">
@@ -15,16 +15,16 @@
         <th></th>
     </thead>
     <tbody>
-        <tr ng-repeat="student in students">
+        <tr ng-repeat="student in students" ng-animate="'animate'">
             <td>
                 <a href="#students/{{student.id}}">{{student.name}}</a>
             </td>
             <td>{{student.age}}</td>
             <td>{{student.mobile}}</td>
             <td>{{student.phone}}</td>
-            <td>{{student.class}}</td>
+            <td>{{student.course}}</td>
             <td>{{student.purpose}}</td>
-            <td>{{student.from.join(",")}}</td>
+            <td>{{student.from_list.join(",")}}</td>
             <td>
                 <a class="btn btn-default" href="#students/{{student.id}}">
                     <span class="glyphicon glyphicon-user"></span>
@@ -32,7 +32,7 @@
                 <a class="btn btn-default" href="#students/{{student.id}}/edit">
                     <span class="glyphicon glyphicon-edit"></span>
                     修改</a>
-                <a class="btn btn-danger" ng-click="rm($index)">
+                <a class="btn btn-danger" ng-click="rm($index, this)" ladda="expand-right">
                     <span class="glyphicon glyphicon-trash"></span>
                     删除</a>
             </td>

@@ -30,13 +30,13 @@
     <div class="form-group">
         <label form="inputClass" class="col-lg-2 control-label">报名班级</label>
         <div class="col-lg-4">
-            <div ng-repeat="class in classNames" class="radio">
+            <div ng-repeat="course in courseNames" class="radio">
                 <label>
                     <input type="radio"
-                        name="class"
-                        ng-model="student.class"
-                        value="{{class}}">
-                        {{class}}
+                        name="course"
+                        ng-model="student.course"
+                        value="{{course}}">
+                        {{course}}
                 </label>
             </div>
         </div>
@@ -62,10 +62,10 @@
                 <label>
                     <input type="checkbox"
                         name="froms[]"
-                        value="{{from.name}}"
-
-                        ng-checked="from.chcked"
-                        ng-model="from.checked">
+                        ng-value="from.name"
+                        ng-model="from.checked"
+                        ng-change="onChangeFrom(this)"
+                        >
                         {{from.name}}
                 </label>
             </div>
@@ -74,7 +74,7 @@
 
     <div class="form-group">
         <div class="col-lg-offset-2 col-lg-10">
-            <button type="submit" class="btn btn-success">
+            <button type="submit" class="btn btn-success" ladda ng-model="saving">
                 <span class="glyphicon glyphicon-ok"></span>
                 保存</button>
             <a href="#students" class="btn btn-default">取消</a>
