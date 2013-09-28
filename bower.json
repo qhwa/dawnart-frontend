@@ -15,6 +15,7 @@
     "underscore": "~1.5.1",
     "requirejs": "~2.1.8",
     "modernizr": "~2.5.3",
+    "angular-bootstrap": "latest",
     "angular-ui-select2": "latest"
   },
   "devDependencies": {
