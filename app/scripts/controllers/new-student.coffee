@@ -1,9 +1,9 @@
 'use strict'
 
 angular.module('dawnartApp')
-  .controller 'NewStudentCtrl', ($scope, $routeParams) ->
+  .controller 'NewStudentCtrl', ($scope, $location, Student, Students) ->
 
-    $scope.classNames = [
+    $scope.courseNames = [
       '全日制班',
       '周末班',
       '寒暑假班',
@@ -27,25 +27,24 @@ angular.module('dawnartApp')
       { name: '其他' }
     ]
 
-    $scope.newStudent = {
-      age: 20
-    }
-
-    $scope.create = () ->
-      student = $scope.newStudent
-      student.from = $scope.selectedFroms()
-      $scope.students.unshift student
-      $scope.newStudent = {}
-      $scope.addingNew = false
+    $scope.student = new Student
 
     $scope.save = () ->
-      $scope.currentStudent.from = $scope.selectedFroms()
-      $scope.editing = false
+
+      $scope.student.from_list = _.pluck(
+        _.where($scope.froms, { checked: true }),
+        'name'
+      )
+
+      $scope.loading = true
+
+      succ = () ->
+        $scope.loading = false
+        $location.path '/students'
+
+      err = (data) ->
+        $scope.loading = false
+
+      new Students($scope.student).$create succ, err
 
     $scope.selectedFroms = () ->
-      _.pluck(_.where($scope.froms, { checked: true }), 'name')
-
-    $scope.setSelectedFroms = (froms) ->
-      _.each $scope.froms, (from) ->
-        from.checked = _.include(froms, from.name)
-

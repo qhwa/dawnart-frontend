@@ -1,14 +1,14 @@
 <div ng-controller="StudentDetailCtrl">
 
     <section class="profile">
+        <h1>{{student.name}}</h1>
         <div class="row">
             <div class="col-md-4">
-                <h1>{{student.name}}</h1>
                 <ul class="unstyled">
                     <li>{{student.age}}岁</li>
                     <li>{{student.mobile}} {{student.phone}}</li>
-                    <li>为了 {{student.purpose}}</li>
-                    <li>来源于 {{student.from.join(",")}}</li>
+                    <li>为了： {{student.purpose}}</li>
+                    <li>来自： {{student.from_list.join(",")}}</li>
                 </ul>
             </div>
 
@@ -17,7 +17,7 @@
                     <table class="table">
                         <tr>
                             <td class="caption">报名班级</td>
-                            <td>{{student.class}}</td>
+                            <td>{{student.course}}</td>
                         </tr>
                         <tr>
                             <td class="caption">总课时</td>
@@ -30,7 +30,7 @@
                                     <div class="progress-bar" role="progressbar" style="width:{{student.progress}}"></div>
                                 </div>
                                 {{student.time_used}}
-                                <a href="#/students/{{student.id}}/attendace">查看详情</a>
+                                <a href="#/students/{{student.id}}/attendace" ng-show="student.progress > 0">查看考勤</a>
                             </td>
                         </tr>
                         <tr>
@@ -39,11 +39,11 @@
                         </tr>
                         <tr>
                             <td class="caption">报名日期</td>
-                            <td>{{student.registed_on}}</td>
+                            <td>{{student.created_at}}</td>
                         </tr>
                         <tr>
                             <td class="caption">上课日期</td>
-                            <td>{{student.begin_on}}</td>
+                            <td>{{student.course_begin_on}}</td>
                         </tr>
                         <tr>
                             <td class="caption">截至日期</td>

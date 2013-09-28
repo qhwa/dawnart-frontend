@@ -1,52 +1,46 @@
-<h1>
-    <span class="glyphicon glyphicon-user"></span> 学员名单
-    <a href="#students/new" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> 添加</a>
-</h1>
+<div ng-controller="StudentCtrl">
+    <h1>
+        <span class="glyphicon glyphicon-user"></span> 学员名单
+        <a href="#students/new" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> 添加</a>
+    </h1>
 
-<table class="table table-striped">
-    <thead>
-        <th>姓名</th>
-        <th>年龄</th>
-        <th>手机</th>
-        <th>电话</th>
-        <th>班级</th>
-        <th>报名原因</th>
-        <th>渠道</th>
-        <th></th>
-    </thead>
-    <tbody>
-        <tr ng-repeat="student in students" ng-animate="'animate'">
-            <td>
-                <a href="#students/{{student.id}}">{{student.name}}</a>
-            </td>
-            <td>{{student.age}}</td>
-            <td>{{student.mobile}}</td>
-            <td>{{student.phone}}</td>
-            <td>{{student.course}}</td>
-            <td>{{student.purpose}}</td>
-            <td>{{student.from_list.join(",")}}</td>
-            <td>
-                <a class="btn btn-default" href="#students/{{student.id}}">
-                    <span class="glyphicon glyphicon-user"></span>
-                    详情</a>
-                <a class="btn btn-default" href="#students/{{student.id}}/edit">
-                    <span class="glyphicon glyphicon-edit"></span>
-                    修改</a>
-                <a class="btn btn-danger" ng-click="rm($index, this)" ladda="expand-right">
-                    <span class="glyphicon glyphicon-trash"></span>
-                    删除</a>
-            </td>
-        </tr>
-    </tbody>
+    <table class="table table-striped">
+        <thead>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>手机</th>
+            <th>电话</th>
+            <th>班级</th>
+            <th>报名原因</th>
+            <th>渠道</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="student in students" ng-animate="'animate'">
+                <td>
+                    <a href="#students/{{student.id}}">{{student.name}}</a>
+                </td>
+                <td>{{student.age}}</td>
+                <td>{{student.mobile}}</td>
+                <td>{{student.phone}}</td>
+                <td>{{student.course}}</td>
+                <td>{{student.purpose}}</td>
+                <td>{{student.from_list.join(",")}}</td>
+                <td>
+                    <a class="btn btn-default" href="#students/{{student.id}}">
+                        <span class="glyphicon glyphicon-user"></span>
+                        详情</a>
+                    <a class="btn btn-default" href="#students/{{student.id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        修改</a>
+                    <a class="btn btn-danger" ng-click="rm($index, $event, this)" ladda="slide-right">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        删除</a>
+                </td>
+            </tr>
+        </tbody>
 
-</table>
+    </table>
 
-<ul class="pagination pull-right">
-  <li class="disabled"><a href="#">&laquo;</a></li>
-  <li class="active"><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#">&raquo;</a></li>
-</ul>
+    <pagination total-items="studentCount" page="currentPage"></pagination>
+</div>

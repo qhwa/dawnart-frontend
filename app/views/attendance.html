@@ -68,13 +68,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="student in students | filter:{attended:false}">
+                <tr ng-repeat="student in students">
                     <td>{{student.id}}</td>
                     <td>{{student.name}}</td>
                     <td>{{student.time_total}}</td>
                     <td>{{student.time_used}}</td>
                     <td>{{student.time_left}}</td>
-                    <td><button class="btn btn-success" ng-click="chooseStudent($index, this)">选择</button></td>
+                    <td><button class="btn btn-success" ng-click="chooseStudent($index, this)" ladda>选择</button></td>
                 </tr>
             </tbody>
         </table>

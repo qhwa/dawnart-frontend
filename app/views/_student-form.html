@@ -1,0 +1,92 @@
+<form ng-submit="save()" class="form-horizontal">
+
+    <div class="form-group">
+        <label for="inputName" class="col-lg-2 control-label">姓名</label>
+        <div class="col-lg-4">
+            <input type="text" class="form-control" id="inputName" ng-model="student.name" required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputAge" class="col-lg-2 control-label">年龄</label>
+        <div class="col-lg-2">
+            <input type="number" class="form-control" id="inputAge" ng-model="student.age" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputMobile" class="col-lg-2 control-label">手机</label>
+        <div class="col-lg-4">
+            <input type="mobile" class="form-control" id="inputMobile" ng-model="student.mobile" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPhone" class="col-lg-2 control-label">电话</label>
+        <div class="col-lg-4">
+            <input type="mobile" class="form-control" id="inputPhone" ng-model="student.phone" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputCourse" class="col-lg-2 control-label">报名班级</label>
+        <div class="col-lg-4">
+            <div ng-repeat="course in courseNames" class="radio">
+                <label>
+                    <input type="radio"
+                        name="course"
+                        ng-model="student.course"
+                        value="{{course}}">
+                        {{course}}
+                </label>
+            </div>
+        </div>
+    </div>
+        
+    <div class="form-group">
+        <label for="time_total" class="col-lg-2 control-label">总课时</label>
+        <div class="col-lg-2">
+            <input type="number" ng-model="student.time_total" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPurpose" class="col-lg-2 control-label">报名原因</label>
+        <div class="col-lg-4">
+            <div ng-repeat="class in purposes" class="radio">
+                <label>
+                    <input type="radio"
+                        name="purpose"
+                        ng-model="student.purpose"
+                        value="{{class}}">
+                        {{class}}
+                </label>
+            </div>
+        </div>
+
+        <label for="inputFrom" class="col-lg-2 control-label">从哪里得知？</label>
+        <div class="col-lg-4">
+            <div ng-repeat="from in froms" class="checkbox">
+                <label>
+                    <input type="checkbox"
+                        name="froms[]"
+                        value="{{from.name}}"
+
+                        ng-checked="from.chcked"
+                        ng-model="from.checked">
+                        {{from.name}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+            <button type="submit" class="btn btn-success" ladda>
+                <span class="glyphicon glyphicon-ok"></span>
+                提交</button>
+            <a href="#students" class="btn btn-default">
+                取消</a>
+        </div>
+    </div>
+</form>

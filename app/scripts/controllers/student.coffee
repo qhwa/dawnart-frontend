@@ -5,7 +5,7 @@ angular.module('dawnartApp')
 
     $scope.students = Students.query()
 
-    $scope.rm = (index, scope) ->
+    $scope.rm = (index, evt, scope) ->
       scope.loading = true
       student = $scope.students[index]
 
@@ -18,3 +18,6 @@ angular.module('dawnartApp')
 
       new Student(student).$destroy succ, err
 
+
+    $scope.studentCount = 64
+    $scope.currentPage = 4

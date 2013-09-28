@@ -1,30 +1,15 @@
 'use strict'
 
 angular.module('dawnartApp')
-  .controller 'StudentDetailCtrl', ($scope) ->
+  .controller 'StudentDetailCtrl', ($scope, $routeParams, Student) ->
     $scope.awesomeThings = [
       'HTML5 Boilerplate'
       'AngularJS'
       'Karma'
     ]
 
-    $scope.student =
-      id:             1
-      name:           "鸽子"
-      pinyin:         "gezi"
-      age: 2
-      mobile:         "15869103067"
-      phone:          ""
-      class:          "全日制班"
-      purpose:        "业余爱好"
-      from:           ["他人推荐"]
-      time_total:     90
-      time_used:      30
-      time_left:      60
-      progress:       '33.33%'
-      registed_on:    '2013-08-01'
-      begin_on:       '2013-08-01'
-      need_finish_on: '2013-10-01'
+    $scope.student = new Student( id: $routeParams.id )
+    $scope.student.$show()
 
     $scope.comments = [
       { body: '付款成功', created_by: 'system', created_at: '2013-08-01', icon_type: 'usd' }

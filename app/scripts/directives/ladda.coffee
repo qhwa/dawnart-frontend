@@ -8,7 +8,7 @@ angular.module('Ladda', [])
 
       elem.addClass( 'ladda-button' )
         .attr 'data-style', () ->
-          $(this).data('style') || 'expand-right'
+          attr.ladda || $(this).data('style') || 'expand-right'
         .prepend () ->
           $('<span/>').addClass( 'ladda-label' )
 
