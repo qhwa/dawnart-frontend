@@ -29,6 +29,11 @@ angular.module('dawnartApp', ['Ladda', 'StudentService', 'AttendanceService', 'u
         controller:     'EditStudentCtrl'
         key:            'students'
 
+      .when '/students/:id/audits',
+        templateUrl:    'views/student-audits.html'
+        controller:     'StudentAuditsCtrl'
+        key:            'students'
+
       .when '/attendance',
         templateUrl:    'views/attendance.html'
         controller:     'AttendanceCtrl'

@@ -2,82 +2,87 @@
     <h1>
         上课记录表
         <span class="pull-right">
-            <small>总人数: {{attendances.length}}</small>
-            <a class="btn btn-success" ng-click="state='choosing-student'">
-                <span class="glyphicon glyphicon-plus"></span>
-                添加</a>
+            <small>今天出勤人数: {{attendances.length}}</small>
         </span>
     </h1>
-    <table class="table" ng-hide="state == 'choosing-student'">
-        <thead>
-            <tr>
-                <th>姓名</th>
-                <th>课时</th>
-                <th>内容</th>
-                <th>进程</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="attd in attendances">
-                <td>{{attd.student_name}}</td>
-                <td>
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default {{activeClass(attd.time, '上午')}}">
-                            <input type="radio" name="options" id="option1"> 上午
-                        </label>
-                        <label class="btn btn-default {{activeClass(attd.time, '下午')}}">
-                            <input type="radio" name="options" id="option2"> 下午
-                        </label>
-                        <label class="btn btn-default {{activeClass(attd.time, '全天')}}">
-                            <input type="radio" name="options" id="option3"> 全天
-                        </label>
-                    </div>
-                </td>
-                <td>
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default {{activeClass(attd.class_content, '素描')}}">
-                            <input type="radio" name="options" id="option1"> 素描
-                        </label>
-                        <label class="btn btn-default {{activeClass(attd.class_content, '色彩')}}">
-                            <input type="radio" name="options" id="option2"> 色彩
-                        </label>
-                    </div>
-                </td>
-                <td>{{attd.info}}</td>
-                <td>
-                    <a class="btn" ng-click="rm($index)">
-                        <span class="glyphicon glyphicon-minus-sign"></span>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 
-    <div class="student-chooser" ng-show="state == 'choosing-student'">
-        <h1>选择学生</h1>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>姓名</th>
-                    <th>总课时</th>
-                    <th>已上</th>
-                    <th>剩余</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="student in students">
-                    <td>{{student.id}}</td>
-                    <td>{{student.name}}</td>
-                    <td>{{student.time_total}}</td>
-                    <td>{{student.time_used}}</td>
-                    <td>{{student.time_left}}</td>
-                    <td><button class="btn btn-success" ng-click="chooseStudent($index, this)" ladda>选择</button></td>
-                </tr>
-            </tbody>
-        </table>
-        <div><button class="btn btn-default" ng-click="state='attendances'">返回</button></div>
+    <div class="row">
+        <div class="col-lg-7">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>姓名</th>
+                        <th>课时</th>
+                        <th>内容</th>
+                        <th>进程</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="attd in attendances">
+                        <td>
+                            <span class="time-used">+{{attd.student.time_used}}</span>
+                        </td>
+                        <td>
+                            <a href="#/students/{{attd.student.id}}">{{attd.student.name}}</a>
+                        </td>
+                        <td>
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default {{activeClass(attd.time, '上午')}}">
+                                    <input type="radio" ng-model="attd.time" name="time" value="上午" ng-change="autoSave($index)" /> 上午
+                                </label>
+                                <label class="btn btn-default {{activeClass(attd.time, '下午')}}">
+                                    <input type="radio" ng-model="attd.time" name="time" value="下午" ng-change="autoSave($index)" /> 下午
+                                </label>
+                                <label class="btn btn-default {{activeClass(attd.time, '全天')}}">
+                                    <input type="radio" ng-model="attd.time" name="time" value="全天" ng-change="autoSave($index)" /> 全天
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default {{activeClass(attd.course_content, '素描')}}">
+                                    <input type="radio" ng-model="attd.course_content" value="素描" ng-change="autoSave($index)" /> 素描
+                                </label>
+                                <label class="btn btn-default {{activeClass(attd.course_content, '色彩')}}">
+                                    <input type="radio" ng-model="attd.course_content" value="色彩" ng-change="autoSave($index)"> 色彩
+                                </label>
+                            </div>
+                        </td>
+                        <td>{{attd.info}}</td>
+                        <td>
+                            <a class="btn" ng-click="rm($index)">
+                                <span class="glyphicon glyphicon-minus-sign"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="student-chooser col-lg-5">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>姓名</th>
+                        <th>总课时</th>
+                        <th>已上</th>
+                        <th>剩余</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students | orderBy:'id'">
+                        <td><button class="btn btn-success" ng-click="chooseStudent($index, this)" ladda>
+                                &lt;&lt; 添加</button></td>
+                        <td>{{student.name}}</td>
+                        <td>{{student.time_total}}</td>
+                        <td>{{student.time_used}}</td>
+                        <td>{{student.time_left}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

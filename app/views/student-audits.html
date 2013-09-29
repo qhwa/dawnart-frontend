@@ -1,0 +1,30 @@
+<div ng-controller="StudentAuditsCtrl">
+    <h1>{{student.name}}:记录</h1>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>类型</th>
+                        <th>详情</th>
+                        <th>课时变化</th>
+                        <th>已上天数</th>
+                        <th>剩余天数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="audit in audits" ng-class="{success: audit.change > 0, active: audit.change < 0}">
+                        <td>{{audit.date}}</td>
+                        <td>{{audit.type}}</td>
+                        <td>{{describe(audit)}}</td>
+                        <td>{{audit.change}}</td>
+                        <td>{{audit.snapshot.time_used}}</td>
+                        <td>{{audit.snapshot.time_left}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -13,37 +13,43 @@ angular.module('dawnartApp')
 
     $scope.rm = (index) ->
       attd    = $scope.attendances[index]
-      student = _.findWhere $scope.students, { id: attd.student_id }
-      student.attended = false
-      $scope.attendances.splice index, 1
+
+      succ = () ->
+        $scope.attendances.splice index, 1
+        $scope.students.push attd.student
+
+      err = () ->
+        console.log '删除失败'
+
+      new Attendance(attd).$destroy succ, err
 
     $scope.activeClass = (expect, real) ->
       if expect == real
         'active'
       else
         ''
-
     $scope.chooseStudent = (index, scope) ->
       student = scope.student
-      student.attended = true
 
-      attendance = {
-        student_id: student.id
-        student_name: student.name
-        time:   '全天'
-        class_content: '素描'
-      }
-
-      succ = () ->
-        $scope.attendances.push attendance
-        $scope.state = 'attendances'
+      succ = (data) ->
         scope.loading = false
+        if data.success
+          $scope.students = _.without($scope.students, student)
+          $scope.attendances.push data.attendance
+          $scope.state = 'attendances'
 
       err = () ->
         console.log '添加失败'
         scope.loading = false
 
       scope.loading = true
-      Attendances.create attendance, succ, err
+      Attendances.create { student_id: student.id }, succ, err
+
+    $scope.autoSave = (index) ->
+      _attd = $scope.attendances[index]
+      attd = new Attendance(_attd)
+      attd.student_id = attd.student.id
+      attd.$update (data) ->
+        _attd.student = data.attendance.student
 
 

@@ -11,31 +11,25 @@
             <th>手机</th>
             <th>电话</th>
             <th>班级</th>
-            <th>报名原因</th>
-            <th>渠道</th>
-            <th></th>
+            <th>总课时</th>
+            <th>剩余课时</th>
+            <th>进度</th>
         </thead>
         <tbody>
-            <tr ng-repeat="student in students" ng-animate="'animate'">
+            <tr ng-repeat="student in students" ng-animate="'animate'" class="student" ng-click="gotoDetail(this)">
                 <td>
-                    <a href="#students/{{student.id}}">{{student.name}}</a>
+                    <a href="#/students/{{student.id}}">{{student.name}}</a>
                 </td>
                 <td>{{student.age}}</td>
                 <td>{{student.mobile}}</td>
                 <td>{{student.phone}}</td>
                 <td>{{student.course}}</td>
-                <td>{{student.purpose}}</td>
-                <td>{{student.from_list.join(",")}}</td>
+                <td>{{student.time_total}}</td>
+                <td>{{student.time_left}}</td>
                 <td>
-                    <a class="btn btn-default" href="#students/{{student.id}}">
-                        <span class="glyphicon glyphicon-user"></span>
-                        详情</a>
-                    <a class="btn btn-default" href="#students/{{student.id}}/edit">
-                        <span class="glyphicon glyphicon-edit"></span>
-                        修改</a>
-                    <a class="btn btn-danger" ng-click="rm($index, $event, this)" ladda="slide-right">
-                        <span class="glyphicon glyphicon-trash"></span>
-                        删除</a>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width:{{student.progress}}"></div>
+                    </div>
                 </td>
             </tr>
         </tbody>

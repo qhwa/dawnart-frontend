@@ -1,9 +1,12 @@
 'use strict'
 
 angular.module('dawnartApp')
-  .controller 'StudentCtrl', ($scope, Students, Student) ->
+  .controller 'StudentCtrl', ($scope, $location, Students, Student) ->
 
     $scope.students = Students.query()
+
+    $scope.gotoDetail = (scope) ->
+      $location.path "/students/#{scope.student.id}"
 
     $scope.rm = (index, evt, scope) ->
       scope.loading = true
@@ -21,3 +24,5 @@ angular.module('dawnartApp')
 
     $scope.studentCount = 64
     $scope.currentPage = 4
+
+

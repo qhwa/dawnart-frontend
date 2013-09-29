@@ -77,7 +77,7 @@ article, aside, figure, footer, header, hgroup, menu, nav, section { display: bl
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
-        max-width: 960px;
+        max-width: 1024px;
     }
 
     /* Remove the padding we set earlier */
@@ -275,4 +275,12 @@ section.comments {
     opacity: 1;
     width: 150px;
     height: 30px;
+}
+
+tr.student {
+    cursor: pointer;
+}
+
+.time-used {
+    color: #16C6E7;
 }

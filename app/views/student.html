@@ -1,7 +1,11 @@
 <div ng-controller="StudentDetailCtrl">
 
     <section class="profile">
-        <h1>{{student.name}}</h1>
+        <h1>{{student.name}}
+                    <a class="btn btn-default pull-right" href="#/students/{{student.id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        修改</a>
+        </h1>
         <div class="row">
             <div class="col-md-4">
                 <ul class="unstyled">
@@ -30,7 +34,7 @@
                                     <div class="progress-bar" role="progressbar" style="width:{{student.progress}}"></div>
                                 </div>
                                 {{student.time_used}}
-                                <a href="#/students/{{student.id}}/attendace" ng-show="student.progress > 0">查看考勤</a>
+                                <a href="#/students/{{student.id}}/audits" ng-show="student.time_used > 0">查看记录</a>
                             </td>
                         </tr>
                         <tr>
