@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('dawnartApp', ['Ladda', 'StudentService', 'AttendanceService', 'ui.bootstrap'])
+angular.module('dawnartApp', ['Ladda', 'StudentService', 'AttendanceService', 'AuditsService', 'ui.bootstrap'])
   .config ($routeProvider) ->
     $routeProvider
 
