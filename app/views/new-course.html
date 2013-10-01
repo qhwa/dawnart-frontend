@@ -1,62 +1,73 @@
 <div ng-controller="CourseCtrl" class="row">
-    <form class="form-horizontal col-lg-6">
-        <div class="form-group" ng-repeat="course in coursePresets" class="radio">
 
-            <label class="col-lg-4 control-label">{{course.name}}</label>
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li><a href="#/students">学生</a></li>
+            <li><a href="#/students/{{student.id}}">"{{student.name}}"</a></li>
+            <li class="active">报名课程</li>
+        </ol>
+    </div>
 
-            <div class="col-lg-8">
-                <span ng-repeat="preset in course.presets">
-                    <input type="button" 
-                        class="btn btn-default"
-                        value="{{preset.months}} 个月"
-                        ng-click="applyPreset(course.name, preset)"
-                    />
-                </span>
+    <div class="col-lg-12">
+        <form class="form-horizontal col-lg-6">
+            <div class="form-group" ng-repeat="course in coursePresets" class="radio">
+
+                <label class="col-lg-4 control-label">{{course.name}}</label>
+
+                <div class="col-lg-8">
+                    <span ng-repeat="preset in course.presets">
+                        <input type="button" 
+                            class="btn btn-default"
+                            value="{{preset.months}} 个月"
+                            ng-click="applyPreset(course.name, preset)"
+                        />
+                    </span>
+                </div>
+
             </div>
+        </form>
 
-        </div>
-    </form>
-
-    <form ng-submit="save()" class="form-horizontal col-lg-6 new-course-form">
-        <div class="form-group">
-            <label class="col-lg-4 control-label">班级</label>
-            <div class="col-lg-5">
-                <input type="text" class="form-control" ng-model="course.name" required />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-4 control-label">时长</label>
-            <div class="col-lg-5">
-                <div class="input-group">
-                    <input type="text" class="form-control" ng-model="course.months" required />
-                    <span class="input-group-addon">个月</span>
+        <form ng-submit="save()" class="form-horizontal col-lg-6 new-course-form">
+            <div class="form-group">
+                <label class="col-lg-4 control-label">班级</label>
+                <div class="col-lg-5">
+                    <input type="text" class="form-control" ng-model="course.name" required />
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-4 control-label">课时</label>
-            <div class="col-lg-5">
-                <div class="input-group">
-                    <input type="text" class="form-control" ng-model="course.time" required />
-                    <span class="input-group-addon">天</span>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">时长</label>
+                <div class="col-lg-5">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="course.months" required />
+                        <span class="input-group-addon">个月</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-4 control-label">学费</label>
-            <div class="col-lg-5">
-                <div class="input-group">
-                    <span class="input-group-addon">￥</span>
-                    <input type="text" class="form-control" ng-model="course.price" required />
-                    <span class="input-group-addon">元</span>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">课时</label>
+                <div class="col-lg-5">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="course.time" required />
+                        <span class="input-group-addon">天</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-4"></label>
-            <div class="col-lg-6">
-                <input type="submit" class="btn btn-success" value="提交" ladda />
+            <div class="form-group">
+                <label class="col-lg-4 control-label">学费</label>
+                <div class="col-lg-5">
+                    <div class="input-group">
+                        <span class="input-group-addon">￥</span>
+                        <input type="text" class="form-control" ng-model="course.price" required />
+                        <span class="input-group-addon">元</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </form>
+            <div class="form-group">
+                <label class="col-lg-4"></label>
+                <div class="col-lg-6">
+                    <input type="submit" class="btn btn-success" value="提交" ladda />
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

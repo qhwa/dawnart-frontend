@@ -1,7 +1,10 @@
 'use strict'
 
 angular.module('dawnartApp')
-  .controller 'CourseCtrl', ($scope, $routeParams, $location, Courses) ->
+  .controller 'CourseCtrl', ($scope, $routeParams, $location, Student, Courses) ->
+
+    $scope.student = new Student( id: $routeParams.student_id )
+    $scope.student.$show()
 
     $scope.course = {
       student_id: $routeParams.student_id

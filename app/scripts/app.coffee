@@ -36,7 +36,7 @@ angular.module('dawnartApp', [
         controller:     'EditStudentCtrl'
         key:            'students'
 
-      .when '/students/:id/audits',
+      .when '/students/:student_id/audits',
         templateUrl:    'views/student-audits.html'
         controller:     'StudentAuditsCtrl'
         key:            'students'

@@ -1,9 +1,12 @@
 'use strict'
 
 angular.module('dawnartApp')
-  .controller 'StudentAuditsCtrl', ($scope, $routeParams, Audits) ->
+  .controller 'StudentAuditsCtrl', ($scope, $routeParams, Student, Audits) ->
 
-    Audits.query { student_id: $routeParams.id }, (audits) ->
+    $scope.student = new Student( id: $routeParams.student_id )
+    $scope.student.$show()
+
+    Audits.query { student_id: $routeParams.student_id }, (audits) ->
       timeTotal = 0
       timeUsed  = 0
       timeLeft  = 0

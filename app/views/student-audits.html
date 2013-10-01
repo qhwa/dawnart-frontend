@@ -1,7 +1,15 @@
 <div ng-controller="StudentAuditsCtrl">
-    <h1>{{student.name}}:记录</h1>
 
     <div class="row">
+
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li><a href="#/students">学生</a></li>
+                <li><a href="#/students/{{student.id}}">"{{student.name}}"</a></li>
+                <li class="active">课时记录</li>
+            </ol>
+        </div>
+
         <div class="col-lg-12">
             <table class="table">
                 <thead>
