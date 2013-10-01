@@ -1,6 +1,13 @@
 'use strict'
 
-angular.module('dawnartApp', ['Ladda', 'StudentService', 'AttendanceService', 'AuditsService', 'ui.bootstrap'])
+angular.module('dawnartApp', [
+  'Ladda',
+  'StudentService',
+  'AttendanceService',
+  'AuditsService',
+  'CourseService',
+  'ui.bootstrap'
+])
   .config ($routeProvider) ->
     $routeProvider
 
@@ -32,6 +39,11 @@ angular.module('dawnartApp', ['Ladda', 'StudentService', 'AttendanceService', 'A
       .when '/students/:id/audits',
         templateUrl:    'views/student-audits.html'
         controller:     'StudentAuditsCtrl'
+        key:            'students'
+
+      .when '/students/:student_id/courses/new',
+        templateUrl:    'views/new-course.html'
+        controller:     'CourseCtrl'
         key:            'students'
 
       .when '/attendance',

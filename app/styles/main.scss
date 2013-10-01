@@ -284,3 +284,23 @@ tr.student {
 .time-used {
     color: #16C6E7;
 }
+
+.register-button {
+    display: inline-block;
+}
+
+.btn.add-student-attd {
+    margin-left: 1em;
+    margin-bottom: 1em;
+    float: right;
+}
+
+.new-course-form {
+    background: $gray-lighter;
+    padding-top: 1em;
+    border-radius: 5px;
+
+    input {
+        text-align: right;
+    }
+}

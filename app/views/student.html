@@ -2,9 +2,15 @@
 
     <section class="profile">
         <h1>{{student.name}}
-                    <a class="btn btn-default pull-right" href="#/students/{{student.id}}/edit">
-                        <span class="glyphicon glyphicon-edit"></span>
-                        修改</a>
+            <span class="pull-right">
+                <a class="btn btn-default" href="#/students/{{student.id}}/edit">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    修改</a>
+
+                <a class="btn btn-primary" href="#/students/{{student.id}}/courses/new">
+                    <span class="glyphicon glyphicon-inbox"></span>
+                    报名课程</a>
+            </span>
         </h1>
         <div class="row">
             <div class="col-md-4">
@@ -21,7 +27,12 @@
                     <table class="table">
                         <tr>
                             <td class="caption">报名班级</td>
-                            <td>{{student.course}}</td>
+                            <td>
+                                <span ng-show="student.courses.length == 0">--</span>
+                                <span ng-repeat="course in student.courses" class="course">
+                                    {{course.name}} <small>({{course.registed_on}}报名)</small> 
+                                </span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="caption">总课时</td>
@@ -42,7 +53,7 @@
                             <td>{{student.time_left}}</td>
                         </tr>
                         <tr>
-                            <td class="caption">报名日期</td>
+                            <td class="caption">创建日期</td>
                             <td>{{student.created_at}}</td>
                         </tr>
                         <tr>

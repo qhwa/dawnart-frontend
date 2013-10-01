@@ -22,8 +22,8 @@ angular.module('dawnartApp')
     $scope.describe = (audit) ->
       switch audit.type
         when '上课'
-          attd = audit.attendance
-          "#{attd.time} / #{attd.course_content}"
+          attd = audit.auditable
+          "#{attd.time} / #{attd.course_content || '--'}"
         when '结课'
           "超时结课"
         else audit.type

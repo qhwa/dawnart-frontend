@@ -6,6 +6,7 @@
 
     <table class="table table-striped">
         <thead>
+            <th></th>
             <th>姓名</th>
             <th>年龄</th>
             <th>手机</th>
@@ -17,13 +18,21 @@
         </thead>
         <tbody>
             <tr ng-repeat="student in students" ng-animate="'animate'" class="student" ng-click="gotoDetail(this)">
+                <td class="time-used">
+                    +{{student.time_used}}
+                </td>
                 <td>
                     <a href="#/students/{{student.id}}">{{student.name}}</a>
                 </td>
                 <td>{{student.age}}</td>
                 <td>{{student.mobile}}</td>
                 <td>{{student.phone}}</td>
-                <td>{{student.course}}</td>
+                <td>
+                    <span ng-show="student.courses.length == 0">--</span>
+                    <span ng-repeat="course in student.courses" class="course">
+                        {{course.name}} 
+                    </span>
+                </td>
                 <td>{{student.time_total}}</td>
                 <td>{{student.time_left}}</td>
                 <td>

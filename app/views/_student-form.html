@@ -29,28 +29,6 @@
     </div>
 
     <div class="form-group">
-        <label for="inputCourse" class="col-lg-2 control-label">报名班级</label>
-        <div class="col-lg-4">
-            <div ng-repeat="course in courseNames" class="radio">
-                <label>
-                    <input type="radio"
-                        name="course"
-                        ng-model="student.course"
-                        value="{{course}}">
-                        {{course}}
-                </label>
-            </div>
-        </div>
-    </div>
-        
-    <div class="form-group">
-        <label for="time_total" class="col-lg-2 control-label">总课时</label>
-        <div class="col-lg-2">
-            <input type="number" ng-model="student.time_total" class="form-control" />
-        </div>
-    </div>
-
-    <div class="form-group">
         <label for="inputPurpose" class="col-lg-2 control-label">报名原因</label>
         <div class="col-lg-4">
             <div ng-repeat="class in purposes" class="radio">

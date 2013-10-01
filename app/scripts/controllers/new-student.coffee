@@ -28,6 +28,8 @@ angular.module('dawnartApp')
     ]
 
     $scope.student = new Student
+      age: 20
+      purpose: '业余爱好'
 
     $scope.save = () ->
 
@@ -38,9 +40,9 @@ angular.module('dawnartApp')
 
       $scope.loading = true
 
-      succ = () ->
+      succ = (student) ->
         $scope.loading = false
-        $location.path '/students'
+        $location.path "/students/#{student.id}/courses/new"
 
       err = (data) ->
         $scope.loading = false

@@ -62,27 +62,9 @@
         </div>
 
         <div class="student-chooser col-lg-5">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>姓名</th>
-                        <th>总课时</th>
-                        <th>已上</th>
-                        <th>剩余</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="student in students | orderBy:'id'">
-                        <td><button class="btn btn-success" ng-click="chooseStudent($index, this)" ladda>
-                                &lt;&lt; 添加</button></td>
-                        <td>{{student.name}}</td>
-                        <td>{{student.time_total}}</td>
-                        <td>{{student.time_used}}</td>
-                        <td>{{student.time_left}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <button ng-repeat="student in students | orderBy:'id':true" class="add-student-attd btn btn-success" ng-click="chooseStudent($index, this)" ladda>
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                {{student.name}}</button>
         </div>
     </div>
 </div>
