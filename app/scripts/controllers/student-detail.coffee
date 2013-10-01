@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('dawnartApp')
-  .controller 'StudentDetailCtrl', ($scope, $routeParams, Student) ->
+  .controller 'StudentDetailCtrl', ($scope, $routeParams, $http, Student) ->
     $scope.awesomeThings = [
       'HTML5 Boilerplate'
       'AngularJS'
@@ -34,3 +34,17 @@ angular.module('dawnartApp')
 
     $scope.rmComment = (index) ->
       $scope.comments.splice( index, 1 )
+
+    $scope.clearTime = () ->
+      $scope.clearing = true
+      if confirm "确认要将#{$scope.student.name}的课时清零吗？该操作不可恢复!"
+        succ = (response) ->
+          $scope.clearing = false
+          $scope.student = new Student(response.data)
+
+        err = () ->
+          $scope.clearing = false
+
+        $http.put( "/api/students/#{$scope.student.id}/clear_time.json" ).then succ, err
+      else
+        $scope.clearing = false

@@ -1,12 +1,12 @@
 'use strict'
 
 angular.module('dawnartApp', [
-  'Ladda',
-  'StudentService',
-  'AttendanceService',
-  'AuditsService',
-  'CourseService',
-  'ui.bootstrap'
+  'Ladda'
+  'StudentService'
+  'AttendanceService'
+  'AuditsService'
+  'CourseService'
+  'FormatDateService'
 ])
   .config ($routeProvider) ->
     $routeProvider

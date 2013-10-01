@@ -1,13 +1,25 @@
 <div ng-controller="AttendanceCtrl">
-    <h1>
-        上课记录表
-        <span class="pull-right">
-            <small>今天出勤人数: {{attendances.length}}</small>
-        </span>
-    </h1>
-
+    <div class="row">
+        <div class="col-lg-12">
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-7">
+            <h1>
+                上课记录表<br/>
+                <a class="btn btn-default" ng-click="prevDay()">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <small class="date">
+                    {{date.format('L / dddd')}}
+                </small>
+                <a class="btn btn-default" ng-click="chooseDate()">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </a>
+                <a class="btn btn-default" ng-click="nextDay()">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </h1>
             <table class="table">
                 <thead>
                     <tr>
@@ -62,9 +74,17 @@
         </div>
 
         <div class="student-chooser col-lg-5">
-            <button ng-repeat="student in students | orderBy:'id':true" class="add-student-attd btn btn-success" ng-click="chooseStudent($index, this)" ladda>
+            <h1>
+                <small>学员名单</small>
+            </h1>
+
+            <button ng-repeat="student in students | orderBy:'id':true" class="add-student-attd btn btn-primary" ng-click="chooseStudent($index, this)" ladda>
                 <span class="glyphicon glyphicon-plus-sign"></span>
                 {{student.name}}</button>
         </div>
+    </div>
+
+    <div class="col-lg-12">
+        <h4>上课人数：{{attendances.length}}</h4>
     </div>
 </div>
