@@ -56,7 +56,7 @@ angular.module('dawnartApp')
       attd = new Attendance(_attd)
       attd.student_id = attd.student.id
       attd.$update (data) ->
-        _attd.student = data.attendance.student
+        _.extend _attd, data.attendance
 
 
     $scope.prevDay = () ->

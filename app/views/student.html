@@ -3,7 +3,7 @@
     <div>
         <ol class="breadcrumb">
             <li><a href="#/students">学员</a></li>
-            <li class="active">"{{student.name}}"</li>
+            <li class="active">{{student.name}}</li>
         </ol>
     </div>
 
@@ -53,7 +53,7 @@
                                 </div>
 
                                 <span>{{student.time_used}} / {{student.time_total}}</span> 
-                                <a href="#/students/{{student.id}}/audits" ng-show="student.time_used > 0">查看课时记录</a>
+                                <a href="#/students/{{student.id}}/audits">查看课时记录</a>
                             </td>
                         </tr>
                         <tr>
