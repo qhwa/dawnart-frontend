@@ -21,20 +21,26 @@ angular.module('dawnartApp')
     $scope.rm = (index) ->
       attd    = $scope.attendances[index]
 
-      succ = () ->
-        $scope.attendances.splice index, 1
-        $scope.students.push attd.student
+      succ = (data) ->
+        if data.success
+          $scope.attendances.splice index, 1
+          $scope.students.push attd.student
+        else
+          err(data)
 
-      err = () ->
+      err = (data) ->
+        console.log data
         console.log '删除失败'
 
       new Attendance(attd).$destroy succ, err
 
-    $scope.activeClass = (expect, real) ->
+    $scope.activeClass = (expect, real, attd) ->
       if expect == real
-        'active'
-      else
-        ''
+        if attd.frozen
+          'btn-info active'
+        else
+          'btn-default active'
+
     $scope.chooseStudent = (index, scope) ->
       student = scope.student
 

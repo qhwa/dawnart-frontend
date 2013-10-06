@@ -9,7 +9,8 @@ angular.module('dawnartApp')
     ]
 
     $scope.student = new Student( id: $routeParams.id )
-    $scope.student.$show()
+    $scope.student.$show ()->
+      $scope.course = $scope.student.course
 
     $scope.comments = [
       { body: '付款成功', created_by: 'system', created_at: '2013-08-01', icon_type: 'usd' }

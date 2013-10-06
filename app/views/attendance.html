@@ -14,7 +14,7 @@
                     {{date.format('L / dddd')}}
                 </small>
                 <a class="btn btn-default" ng-click="chooseDate()">
-                    <span class="glyphicon glyphicon-calendar"></span>
+                    <span class="glyphicon glyphicon-calendar" timepicker></span>
                 </a>
                 <a class="btn btn-default" ng-click="nextDay()">
                     <span class="glyphicon glyphicon-chevron-right"></span>
@@ -41,30 +41,30 @@
                         </td>
                         <td>
                             <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default {{activeClass(attd.time, '上午')}}">
+                                <label class="btn btn-default {{activeClass(attd.time, '上午', attd)}}" ng-class="{disabled:attd.frozen}">
                                     <input type="radio" ng-model="attd.time" name="time" value="上午" ng-change="autoSave($index)" /> 上午
                                 </label>
-                                <label class="btn btn-default {{activeClass(attd.time, '下午')}}">
+                                <label class="btn btn-default {{activeClass(attd.time, '下午', attd)}}" ng-class="{disabled:attd.frozen}">
                                     <input type="radio" ng-model="attd.time" name="time" value="下午" ng-change="autoSave($index)" /> 下午
                                 </label>
-                                <label class="btn btn-default {{activeClass(attd.time, '全天')}}">
+                                <label class="btn btn-default {{activeClass(attd.time, '全天', attd)}}" ng-class="{disabled:attd.frozen}">
                                     <input type="radio" ng-model="attd.time" name="time" value="全天" ng-change="autoSave($index)" /> 全天
                                 </label>
                             </div>
                         </td>
                         <td>
                             <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default {{activeClass(attd.course_content, '素描')}}">
+                                <label class="btn btn-default {{activeClass(attd.course_content, '素描', attd)}}" ng-class="{disabled:attd.frozen}">
                                     <input type="radio" ng-model="attd.course_content" value="素描" ng-change="autoSave($index)" /> 素描
                                 </label>
-                                <label class="btn btn-default {{activeClass(attd.course_content, '色彩')}}">
+                                <label class="btn btn-default {{activeClass(attd.course_content, '色彩', attd)}}" ng-class="{disabled:attd.frozen}">
                                     <input type="radio" ng-model="attd.course_content" value="色彩" ng-change="autoSave($index)"> 色彩
                                 </label>
                             </div>
                         </td>
                         <td>{{attd.info}}</td>
                         <td>
-                            <a class="btn" ng-click="rm($index)">
+                            <a class="btn" ng-click="rm($index)" ng-hide="attd.frozen">
                                 <span class="glyphicon glyphicon-minus-sign"></span>
                             </a>
                         </td>
@@ -78,7 +78,7 @@
                 <small>学员名单</small>
             </h1>
 
-            <button ng-repeat="student in students | orderBy:'id':true" class="add-student-attd btn btn-primary" ng-click="chooseStudent($index, this)" ladda>
+            <button ng-repeat="student in students | orderBy:'id':true" class="add-student-attd btn btn-info" ng-click="chooseStudent($index, this)" ladda>
                 <span class="glyphicon glyphicon-plus-sign"></span>
                 {{student.name}}</button>
         </div>

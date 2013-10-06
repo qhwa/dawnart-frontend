@@ -1,10 +1,11 @@
 'use strict'
 
 angular.module('dawnartApp')
-  .controller 'CourseCtrl', ($scope, $routeParams, $location, Student, Courses) ->
+  .controller 'CourseCtrl', ($scope, $routeParams, $location, $http, Student, Courses) ->
 
     $scope.student = new Student( id: $routeParams.student_id )
     $scope.student.$show()
+    $scope.actionName = '报名课程'
 
     $scope.course = {
       student_id: $routeParams.student_id
@@ -96,5 +97,22 @@ angular.module('dawnartApp')
       err = () ->
         $scope.loading = false
 
+      $scope.course.continued = !!$scope.continued
       Courses.create( $scope.course, succ, err )
 
+    $scope.chooseClear = () ->
+      $scope.clearing = true
+      succ = (response) ->
+        $scope.clearing = false
+        $scope.student = new Student(response.data)
+        $scope.actionName = "新报课程"
+
+      err = () ->
+        $scope.clearing = false
+
+      $http.put( "/api/students/#{$scope.student.id}/clear_time.json" ).then succ, err
+
+    $scope.chooseContinue = () ->
+      $scope.actionName = '续报课程'
+      $scope.continued = $scope.student.time_left
+      $scope.student.course = undefined

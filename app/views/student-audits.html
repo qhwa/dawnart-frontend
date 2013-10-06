@@ -23,7 +23,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="audit in audits" ng-class="{success: audit.change > 0, active: audit.change < 0}">
+                    <tr ng-repeat="audit in audits" ng-class="{
+                        success: audit.change > 0,
+                        active:  audit.change < 0,
+                        danger:  audit.type == '清零'
+                    }">
                         <td>{{audit.date}}</td>
                         <td>{{audit.type}}</td>
                         <td>{{describe(audit)}}</td>

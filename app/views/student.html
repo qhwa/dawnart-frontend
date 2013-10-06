@@ -20,7 +20,7 @@
 
                 <a class="btn btn-danger" ng-show="student.time_left != 0" ng-click="clearTime()" ladda ng-model="clearing">
                     <span class="glyphicon glyphicon-refresh"></span>
-                    课时清零</a>
+                    结课</a>
             </span>
         </h1>
         <div class="row">
@@ -37,11 +37,17 @@
                 <div class="col-md-10">
                     <table class="table">
                         <tr>
-                            <td class="caption">报名班级</td>
+                            <td class="caption">报名课程</td>
                             <td>
-                                <span ng-show="student.courses.length == 0">--</span>
-                                <span ng-repeat="course in student.courses" class="course">
-                                    {{course.name}} <small>({{course.registed_on}}报名)</small> 
+                                <span ng-hide="course">
+                                    当前没有进行中的课程
+                                    <span ng-show="courses_count">
+                                        <a href="#/students/{{student.id}}/courses">查看已完成课程</a>
+                                    </span>
+                                </span>
+
+                                <span ng-show="course" class="course">
+                                    {{course.months}}个月 {{course.name}}
                                 </span>
                             </td>
                         </tr>
@@ -49,28 +55,24 @@
                             <td class="caption">已用课时</td>
                             <td>
                                 <div class="time-progress progress">
-                                    <div class="progress-bar" role="progressbar" style="width:{{student.progress}}"></div>
+                                    <div class="progress-bar" role="progressbar" style="width:{{course.progress}}"></div>
                                 </div>
 
-                                <span>{{student.time_used}} / {{student.time_total}}</span> 
+                                <span>{{course.time_used}} / {{course.time_total}}</span> 
                                 <a href="#/students/{{student.id}}/audits">查看课时记录</a>
                             </td>
                         </tr>
                         <tr>
                             <td class="caption">剩余课时</td>
-                            <td>{{student.time_left}}</td>
-                        </tr>
-                        <tr>
-                            <td class="caption">创建日期</td>
-                            <td>{{student.created_at | date}}</td>
+                            <td>{{course.time_left}}</td>
                         </tr>
                         <tr>
                             <td class="caption">上课日期</td>
-                            <td>{{student.course_begin_on}}</td>
+                            <td>{{course.started_on}}</td>
                         </tr>
                         <tr>
                             <td class="caption">截至日期</td>
-                            <td>{{student.need_finish_on}}</td>
+                            <td>{{course.need_finish_on}}</td>
                         </tr>
                     </table>
                 </div>
