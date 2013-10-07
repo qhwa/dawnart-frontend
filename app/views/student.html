@@ -8,29 +8,27 @@
     </div>
 
     <section class="profile">
-        <h1>{{student.name}}
-            <span class="pull-right">
-                <a class="btn btn-default" href="#/students/{{student.id}}/edit">
-                    <span class="glyphicon glyphicon-edit"></span>
-                    修改</a>
-
-                <a class="btn btn-primary" href="#/students/{{student.id}}/courses/new">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    加报课程</a>
-
-                <a class="btn btn-danger" ng-show="student.time_left != 0" ng-click="clearTime()" ladda ng-model="clearing">
-                    <span class="glyphicon glyphicon-refresh"></span>
-                    结课</a>
-            </span>
-        </h1>
         <div class="row">
             <div class="col-md-4">
+                <h1>{{student.name}}
+                    <span class="pull-right">
+                    </span>
+                </h1>
                 <ul class="unstyled">
                     <li>{{student.age}}岁</li>
                     <li>{{student.mobile}} {{student.phone}}</li>
                     <li>为了： {{student.purpose}}</li>
                     <li>来自： {{student.from_list.join(",")}}</li>
                 </ul>
+                <p class="actions">
+                    <a class="btn btn-default" href="#/students/{{student.id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        修改</a>
+
+                    <a class="btn btn-primary" href="#/students/{{student.id}}/courses/new">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        加报课程</a>
+                </p>
             </div>
 
             <div class="col-md-8">
@@ -47,7 +45,7 @@
                                 </span>
 
                                 <span ng-show="course" class="course">
-                                    {{course.months}}个月 {{course.name}}
+                                    {{course.long_name}}
                                 </span>
                             </td>
                         </tr>
@@ -58,13 +56,18 @@
                                     <div class="progress-bar" role="progressbar" style="width:{{course.progress}}"></div>
                                 </div>
 
-                                <span>{{course.time_used}} / {{course.time_total}}</span> 
+                                <span ng-show="course">{{course.time_used}} / {{course.time_total}}</span> 
                                 <a href="#/students/{{student.id}}/audits">查看课时记录</a>
                             </td>
                         </tr>
                         <tr>
                             <td class="caption">剩余课时</td>
-                            <td>{{course.time_left}}</td>
+                            <td>
+                                {{course.time_left}}
+                                <a class="btn btn-danger" ng-show="student.course" ng-click="clearTime()" ladda ng-model="clearing">
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                    结课</a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="caption">上课日期</td>
@@ -82,7 +85,7 @@
 
     <section class="comments">
         <h4>备注</h4>
-        <article ng-repeat="comment in comments" class="comment">
+        <article ng-repeat="comment in comments" class="comment comment-{{comment.icon_type}}">
             <div class="comment-icon comment-icon-{{comment.icon_type}}">
                 <span class="glyphicon glyphicon-{{comment.icon_type}}"></span>
             </div>
@@ -90,32 +93,58 @@
             <div class="comment-body">
                 <div class="text">
                     <p>{{comment.body}}
-                        <span class="pull-right">
-                            <a ng-click="rmComment($index)" href="">
+                        <span class="pull-right" ng-hide="comment.created_by == 'system'">
+                            <a ng-click="rmComment($index, $event, this)" href="" ladda="slide-right" ng-model="removing">
                                 <span class="glyphicon glyphicon-trash">
                             </a>
                         </span>
                     </p>
                 </div>
                 <p class="attribution">
-                    {{comment.created_by}} / {{comment.created_at}}
+                    {{comment.created_by}} / {{comment.created_at | date}}
                 </p>
             </div>
         </article>
 
-        <div class="new-comment">
+        <div class="new-comment comment">
 
             <div class="caption" ng-click="addComment()" ng-hide="addingComment">添加备注...</div>
 
-            <form ng-show="addingComment" ng-submit="createComment()" role="form">
-                <div class="form-group">
-                    <textarea id="comment-body" class="form-control input-block-level" ng-model="newComment.body" rows="6"></textarea>
+            <div ng-show="addingComment">
+
+                <div class="comment-icon comment-icon-{{newComment.icon_type}}"
+                    ng-animate="test"
+                    >
+                    <span class="glyphicon glyphicon-{{newComment.icon_type}}"></span>
                 </div>
-                <div class="form-actions form-group">
-                    <button type="submit" class="btn btn-success">提交</button>
-                    <button type="button" class="btn btn-default" ng-click="addingComment=false">取消</button>
+                
+                <div class="comment-body">
+
+                    <div class="icon-chooser clearfix">
+
+                        <div class="icon" ng-repeat="icon in icon_types">
+                            <div class="comment-icon comment-icon-{{icon.slug}}" 
+                                ng-click="chooseIcon($index)"
+                                ng-class="{active:icon.slug==newComment.icon_type}">
+                                <span class="glyphicon glyphicon-{{icon.slug}}"></span>
+                            </div>
+                            <div class="icon-name">
+                                {{icon.name}}
+                            </div>
+                        </div>
+                
+                    </div>
+                    <form class="new-comment-form clearfix" ng-submit="createComment()" role="form">
+                        <div class="form-group">
+                            <textarea id="comment-body" class="form-control input-block-level" ng-model="newComment.body" rows="6"></textarea>
+                        </div>
+                        <div class="form-actions form-group">
+                            <button type="submit" class="btn btn-success" ladda ng-model="creatingComment">提交</button>
+                            <button type="button" class="btn btn-default" ng-click="addingComment=false">取消</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
 
     </section>

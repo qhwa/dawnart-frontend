@@ -87,6 +87,7 @@ angular.module('dawnartApp')
       $scope.course.months  = preset.months
       $scope.course.time    = preset.time
       $scope.course.price   = preset.price
+      $scope.course.payment = preset.price
 
     $scope.save = (data) ->
       $scope.loading = true
@@ -113,6 +114,7 @@ angular.module('dawnartApp')
       $http.put( "/api/students/#{$scope.student.id}/clear_time.json" ).then succ, err
 
     $scope.chooseContinue = () ->
+      console.log 'to continue'
       $scope.actionName = '续报课程'
-      $scope.continued = $scope.student.time_left
+      $scope.continued = $scope.student.course.time_left
       $scope.student.course = undefined

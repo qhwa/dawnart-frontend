@@ -7,6 +7,7 @@ angular.module('dawnartApp', [
   'AuditsService'
   'CourseService'
   'FormatDateService'
+  'CommentService'
 ])
   .config ($routeProvider) ->
     $routeProvider

@@ -33,10 +33,8 @@
                         {{student.phone}}</span>
                 </td>
                 <td>
-                    <span ng-show="student.courses.length == 0">--</span>
-                    <span ng-repeat="course in student.courses" class="course">
-                        {{course.name}} 
-                    </span>
+                    <span ng-hide="student.course">--</span>
+                    {{student.course.name}} 
                 </td>
                 <td>{{student.course.time_total}}</td>
                 <td>{{student.course.time_left}}</td>

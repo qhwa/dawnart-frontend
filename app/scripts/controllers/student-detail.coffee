@@ -1,21 +1,24 @@
 'use strict'
 
 angular.module('dawnartApp')
-  .controller 'StudentDetailCtrl', ($scope, $routeParams, $http, Student) ->
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate'
-      'AngularJS'
-      'Karma'
+  .controller 'StudentDetailCtrl', ($scope, $routeParams, $http, Student, Comment, Comments) ->
+    $scope.icon_types = [
+      { slug: "usd", name: '学费' }
+      { slug: "time", name: '请假' }
+      { slug: "comment", name: '其他' }
     ]
 
     $scope.student = new Student( id: $routeParams.id )
     $scope.student.$show ()->
       $scope.course = $scope.student.course
 
-    $scope.comments = [
-      { body: '付款成功', created_by: 'system', created_at: '2013-08-01', icon_type: 'usd' }
-      { body: '请假1天',  created_by: 'system', created_at: '2013-08-27', icon_type: 'comment' }
-    ]
+    $scope.comments = Comments.query( student_id: $scope.student.id )
+    $scope.newComment = {
+      body: '',
+      icon_type: 'comment'
+    }
+
+    $scope.addingComment = false
 
     $scope.addComment = () ->
       $scope.addingComment = true
@@ -24,17 +27,32 @@ angular.module('dawnartApp')
       , 0)
 
     $scope.createComment = () ->
-      $scope.comments.push
-        body: $scope.newComment.body
-        created_by: 'user'
-        created_at: new Date()
-        icon_type: 'comment'
+      $scope.creatingComment = true
 
-      $scope.newComment.body = ""
-      $scope.addingComment = false
+      succ = (comment) ->
+        $scope.newComment.body = ""
+        $scope.comments.push comment
+        $scope.creatingComment = false
+        $scope.addingComment   = false
 
-    $scope.rmComment = (index) ->
-      $scope.comments.splice( index, 1 )
+      err = () ->
+        console.log '创建失败'
+        $scope.creatingComment = false
+
+      Comments.create { student_id: $scope.student.id }, $scope.newComment, succ, err
+
+    $scope.rmComment = (index, evt, scope) ->
+      scope.removing = true
+
+      succ = () ->
+        scope.removing = false
+        $(evt.target).closest('.comment').slideUp () ->
+          $scope.comments.splice( index, 1 )
+
+      err = () ->
+        scope.removing = false
+
+      new Comment( id: $scope.comments[index].id, student_id: $scope.student.id ).$destroy succ, err
 
     $scope.clearTime = () ->
       $scope.clearing = true
@@ -49,3 +67,6 @@ angular.module('dawnartApp')
         $http.put( "/api/students/#{$scope.student.id}/clear_time.json" ).then succ, err
       else
         $scope.clearing = false
+
+    $scope.chooseIcon = (index) ->
+      $scope.newComment.icon_type = $scope.icon_types[index].slug

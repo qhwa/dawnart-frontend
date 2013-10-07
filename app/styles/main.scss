@@ -6,6 +6,8 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 @import 'steps';
 @import 'entypo-icon';
 
+$brand-date: #E5B0FA;
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
@@ -151,7 +153,7 @@ section.comments {
     border-radius: 100px;
     background: rgba(0,0,0,.06);
     overflow: hidden;
-    line-height: 50px;
+    line-height: 45px;
     font-size: 18px;
     width: 50px;
     height: 50px;
@@ -160,11 +162,24 @@ section.comments {
     color: #fff;
 
     &.comment-icon-usd {
-        background: #f0ad4e;
+        background: #f0ad4e !important;
+    }
+
+    &.comment-icon-plus {
+        background: $brand-success !important;
+    }
+
+    &.comment-icon-refresh {
+        background: $brand-danger !important;
     }
 
     &.comment-icon-comment {
     }
+
+    &.comment-icon-time {
+        background: $brand-date !important;
+    }
+
 }
 
 .comment-body { overflow: hidden }
@@ -182,6 +197,38 @@ section.comments {
     margin: 0.5em 0 0;
     font-size: 14px;
     color: #666;
+}
+
+.icon-chooser {
+
+    margin-right: -2em;
+    padding: 0.5em;
+
+    .icon {
+        float: left;
+        text-align: center;
+        margin-left: 1em;
+
+        .comment-icon {
+            margin-bottom: 8px;
+            margin-right: 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            float: none;
+
+            &:hover {
+                border-color: $brand-success;
+            }
+
+            &.active {
+                border-color: $brand-success;
+            }
+        }
+    }
+
+    .icon-name {
+        clear: left;
+    }
 }
 
 /* Decoration */
@@ -239,15 +286,19 @@ section.comments {
 }
 
 .new-comment {
-    margin-left: 85px;
 
     .caption {
+        margin-left: 87px;
         background: #fff;
         padding: 1em;
         color: $gray-light;
         cursor: text;
         border-radius: 5px;
     }
+
+    .new-comment-form {
+    }
+
 }
 
 
@@ -321,7 +372,7 @@ tr.student {
 }
 
 .date {
-    color: #E5B0FA;
+    color: $brand-date;
 }
 
 .time-progress {
@@ -333,4 +384,8 @@ tr.student {
 
 .calc-result {
     border-top: 1px solid $gray-darker;
+}
+
+.actions {
+    margin: 1em 0 1em 25px;
 }
