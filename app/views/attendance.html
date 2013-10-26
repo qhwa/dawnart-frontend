@@ -78,9 +78,12 @@
                 <small>学员名单</small>
             </h1>
 
-            <button ng-repeat="student in students | orderBy:'id':true" class="add-student-attd btn btn-info" ng-click="chooseStudent($index, this)" ladda>
-                <span class="glyphicon glyphicon-plus-sign"></span>
-                {{student.name}}</button>
+            <div ng-repeat="(letter, students) in studentsGroupByPinyin | orderBy:'letter'">
+                <h2 class="pinyin-letter">{{letter}}</h2>
+                <button ng-repeat="student in students | orderBy:'id':true" class="add-student-attd btn btn-info" ng-click="chooseStudent($index, this)" ladda>
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                    {{student.name}}</button>
+            </div>
         </div>
     </div>
 

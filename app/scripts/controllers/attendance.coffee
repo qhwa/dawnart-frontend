@@ -10,6 +10,8 @@ angular.module('dawnartApp')
     $http.get( '/api/students/available.json?date=' + dateStr )
       .success (students) ->
         $scope.students = students
+        $scope.studentsGroupByPinyin = _.groupBy $scope.students, (s) ->
+          s.pinyin[0].toUpperCase()
 
     $http.get( '/api/attendances.json?date=' + dateStr )
       .success (attendances) ->
