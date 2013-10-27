@@ -28,11 +28,17 @@ angular.module('dawnartApp')
 
     $scope.filters = [
       {
+        name: '还在上课的',
+        filter: (s) ->
+          !!s.course
+      }
+
+      {
         name: '课程已过期',
         filter: (s) ->
           if s.course && s.course.need_finish_on
             moment(s.course.need_finish_on).isBefore()
-      },
+      }
 
       {
         name: '课程即将过期',
@@ -41,9 +47,10 @@ angular.module('dawnartApp')
             m = moment(s.course.need_finish_on)
             m.isAfter() && m.isBefore( moment().add(7,'days') )
       }
+
     ]
 
-    $scope.currentFilter = null
+    $scope.currentFilter = $scope.filters[0]
     $scope.studentsCount = ( filter ) ->
       _.filter( $scope.students, filter.filter ).length
 
