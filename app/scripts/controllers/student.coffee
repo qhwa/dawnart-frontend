@@ -26,3 +26,33 @@ angular.module('dawnartApp')
     $scope.currentPage = 4
 
 
+    $scope.filters = [
+      {
+        name: '课程已过期',
+        filter: (s) ->
+          if s.course && s.course.need_finish_on
+            moment(s.course.need_finish_on).isAfter()
+      },
+
+      {
+        name: '课程即将过期',
+        filter: (s) ->
+          if s.course && s.course.need_finish_on
+            m = moment(s.course.need_finish_on)
+            m.isBefore() && m.isAfter( moment().subtract(7,'days') )
+      }
+    ]
+
+    $scope.currentFilter = null
+    $scope.studentsCount = ( filter ) ->
+      _.filter( $scope.students, filter.filter ).length
+
+    $scope.getActiveClass = (scope) ->
+      current = $scope.currentFilter
+      if scope.filter == current || !scope.filter && !current
+        'active'
+
+    $scope.filterBy = ( scope, evt ) ->
+      evt.preventDefault()
+      $scope.currentFilter = scope.filter
+

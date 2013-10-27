@@ -4,6 +4,22 @@
         <a href="#/students/new" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> 新学员报名</a>
     </h1>
 
+    <div class="scopes btn-group">
+
+        <a href="#" class="btn btn-default"
+            ng-click="filterBy(this, $event)"
+            ng-class="getActiveClass(this)">
+            All ({{students.length}})
+        </a>
+
+        <a href="#" ng-repeat="filter in filters" ng-click="filterBy(this, $event)" 
+            class="btn btn-default" ng-class="getActiveClass(this)"
+            >
+            {{filter.name}} ({{studentsCount( filter )}})
+        </a>
+         
+    </div>
+
     <table class="table table-striped">
         <thead>
             <th></th>
@@ -16,7 +32,7 @@
             <th>进度</th>
         </thead>
         <tbody>
-            <tr ng-repeat="student in students" ng-animate="'animate'" class="student" ng-click="gotoDetail(this)">
+            <tr ng-repeat="student in students | filter: currentFilter.filter" ng-animate="'animate'" class="student" ng-click="gotoDetail(this)">
                 <td class="time-used">
                     +{{student.course.time_used}}
                 </td>
