@@ -7,6 +7,18 @@ angular.module('dawnartApp')
 
     dateStr = $scope.date.format('YYYY-MM-DD')
 
+    $('#choose-date').datepicker
+      todayBtn:       true
+      todayHighlight: true
+      autoclose:      true
+      language:       'zh-CN'
+    .datepicker( 'update', $scope.date.toDate() )
+    .on 'changeDate', (evt) ->
+      $scope.$apply () ->
+        $scope.setDate evt.date
+
+
+
     $http.get( '/api/students/available.json?date=' + dateStr )
       .success (students) ->
         $scope.students = students
@@ -78,4 +90,3 @@ angular.module('dawnartApp')
     $scope.setDate = (date) ->
       date = moment(date)
       $location.search "date", date.format('YYYY-MM-DD')
-
