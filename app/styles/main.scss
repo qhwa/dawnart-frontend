@@ -5,6 +5,7 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 @import 'no-more-table';
 @import 'steps';
 @import 'entypo-icon';
+@import '../bower_components/bootstrap-datepicker/css/datepicker.css';
 
 $brand-date: #E5B0FA;
 
@@ -392,4 +393,8 @@ tr.student {
 
 .pinyin-letter {
     color: $gray-light;
+}
+
+.datepicker {
+    padding: 1em;
 }
