@@ -31,7 +31,7 @@ angular.module('dawnartApp')
         name: '课程已过期',
         filter: (s) ->
           if s.course && s.course.need_finish_on
-            moment(s.course.need_finish_on).isAfter()
+            moment(s.course.need_finish_on).isBefore()
       },
 
       {
@@ -39,7 +39,7 @@ angular.module('dawnartApp')
         filter: (s) ->
           if s.course && s.course.need_finish_on
             m = moment(s.course.need_finish_on)
-            m.isBefore() && m.isAfter( moment().subtract(7,'days') )
+            m.isAfter() && m.isBefore( moment().add(7,'days') )
       }
     ]
 
