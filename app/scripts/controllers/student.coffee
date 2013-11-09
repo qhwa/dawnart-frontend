@@ -28,12 +28,6 @@ angular.module('dawnartApp')
 
     $scope.filters = [
       {
-        name: '还在上课的',
-        filter: (s) ->
-          !!s.course
-      }
-
-      {
         name: '课程已过期',
         filter: (s) ->
           if s.course && s.course.need_finish_on
@@ -50,7 +44,7 @@ angular.module('dawnartApp')
 
     ]
 
-    $scope.currentFilter = $scope.filters[0]
+    $scope.currentFilter = null
     $scope.studentsCount = ( filter ) ->
       _.filter( $scope.students, filter.filter ).length
 
