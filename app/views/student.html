@@ -15,7 +15,7 @@
                     </span>
                 </h1>
                 <ul class="unstyled">
-                    <li>{{student.age}}岁</li>
+                    <li ng-show="student.age">{{student.age}}岁</li>
                     <li>{{student.mobile}} {{student.phone}}</li>
                     <li>为了： {{student.purpose}}</li>
                     <li>来自： {{student.from_list.join(",")}}</li>
