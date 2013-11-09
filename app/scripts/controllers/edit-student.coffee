@@ -37,7 +37,7 @@ angular.module('dawnartApp')
 
       succ = () ->
         $scope.saving = false
-        $location.path '/students'
+        $location.path "/students/#{$scope.student.id}"
 
       err = () ->
         $scope.saving = false
